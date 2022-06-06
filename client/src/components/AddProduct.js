@@ -23,9 +23,9 @@ const ToggleableForm = ({formInfo}) => {
         <p><a className="button add-product-button">Add A Product</a></p>
         <h3>Add Product</h3>
         <form>
-          <ProductInput product={{ product: { product, productId } }} />
-          <ProductInput product={{ product: { price, priceId } }} />
-          <ProductInput product={{ product: { quantity, quantityId } }} />
+          <ProductInput product={{ title:product, id:productId }} />
+          <ProductInput product={{ title:price, id:priceId }} />
+          <ProductInput product={{ title:quantity, id:quantityId }} />
           <div className="actions form-actions">
             <a className="button" onClick={handleActionClick}>{actionTitle}</a>
             <a 
