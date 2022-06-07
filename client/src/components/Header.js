@@ -1,12 +1,12 @@
 import CartSummary from './CartSummary'
 
-const Header = () => {
-  return ( 
+const Header = ({ cartItems }) => {
+  return (
     <header>
       <h1>The Shop!</h1>
-      <CartSummary />
-    </header> 
+      <CartSummary cartItems={cartItems} />
+    </header>
   );
-}
+};
  
 export default Header;
