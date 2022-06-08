@@ -135,20 +135,7 @@ Implementation
       - setCart({})
 
 
-## 1.6. POST /api/checkout
-- Removes items from the cart
-
-### 1.6.1. Expected Payload
-None
-
-### 1.6.2. Successful Response
-
-Empty json body
-
-#### 1.6.2.1. Example Response
-
-```json
-
-```
+// Review API Documentation
+  - edge case when we run out of products
 
 */

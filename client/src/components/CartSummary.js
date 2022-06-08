@@ -9,10 +9,9 @@ const CartSummary = ({ cartItems, onCheckoutCart }) => {
       )}
       <a
         className={`button checkout ${
-          cartItems.length === 0 ? 'disabled' : ''
-        }`
-      }
-      onClick={onCheckoutCart}
+          Object.keys(cartItems).length === 0 ? 'disabled' : ''
+        }`}
+        onClick={onCheckoutCart}
       >
         Checkout
       </a>
