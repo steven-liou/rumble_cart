@@ -22,7 +22,12 @@ const App = () => {
   useEffect(() => {
     const fetchCartItems = async () => {
       const res = await axios.get('/api/cart');
-      setCartItems(res.data);
+      const data = await res.data;
+      const cart = data.reduce((total, item) => {
+        total[item.productId] = item;
+        return total;
+      }, {});
+      setCartItems(cart);
     };
     fetchCartItems();
   }, []);
@@ -54,10 +59,14 @@ const App = () => {
 
   const handleAddToCart = async (productId) => {
     const res = await axios.post(`/api/add-to-cart`, { productId });
-    const {  product:updatedProduct, item } =  res.data; // do you need to await again?
+    const { product: updatedProduct, item } = await res.data;
 
+    const cart = { ...cartItems };
 
-    setCartItems(cartItems.concat(item));
+    cart[item.productId].quantity =
+      (cart[item.productId].quantity ? cart[item.productId].quantity : 0) + 1;
+
+    setCartItems(cart);
     setProducts(
       products.map((product) =>
         product._id === updatedProduct._id ? updatedProduct : product

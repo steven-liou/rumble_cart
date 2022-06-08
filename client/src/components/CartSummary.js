@@ -2,7 +2,7 @@ const CartSummary = ({ cartItems }) => {
   return (
     <div className="cart">
       <h2>Your Cart</h2>
-      {cartItems.length === 0 ? (
+      {Object.keys(cartItems).length === 0 ? (
         <EmptyCartSummary />
       ) : (
         <SummaryTable cartItems={cartItems} />
@@ -28,6 +28,7 @@ const EmptyCartSummary = () => {
 };
 
 const SummaryTable = ({ cartItems }) => {
+  cartItems = Object.values(cartItems);
   const total = cartItems.reduce((sum, item) => sum + item.price, 0);
   return (
     <table className="cart-items">
