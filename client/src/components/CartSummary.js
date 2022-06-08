@@ -46,7 +46,7 @@ const SummaryTable = ({ cartItems }) => {
             <tr key={item._id}>
               <td>{item.title}</td>
               <td>{item.quantity}</td>
-              <td>${item.price.toFixed(2)}</td>
+              <td>${item.price && item.price.toFixed(2)}</td>
             </tr>
           );
         })}

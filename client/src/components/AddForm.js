@@ -16,7 +16,10 @@ const AddForm = ({ onAddProduct }) => {
 
   const handleAddProduct = (event) => {
     event.preventDefault();
-
+    if (!(title && price && quantity)) {
+      alert('All fields must be filled');
+      return
+    }
     const newProduct = {
       title,
       price,
@@ -37,6 +40,8 @@ const AddForm = ({ onAddProduct }) => {
         </a>
       </p>
       <h3>Add Product</h3>
+
+      
       <form>
         <ProductInput
           title="Product Name"

@@ -3,17 +3,21 @@ import { useState } from 'react';
 
 const EditForm = ({ onUpdateProduct, product }) => {
   const [showEditForm, setShowEditForm] = useState(false);
-  const [stateProduct, setProduct] = useState(product.title);
-  const [statePrice, setPrice] = useState(product.price);
-  const [stateQuantity, setQuantity] = useState(product.quantity);
+  const [title, setProduct] = useState(product.title);
+  const [price, setPrice] = useState(product.price);
+  const [quantity, setQuantity] = useState(product.quantity);
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (!(title && price && quantity)) {
+      alert('All fields must be filled');
+      return;
+    }
     const newProduct = {
-      title: stateProduct,
-      price: statePrice,
-      quantity: stateQuantity,
-      id: product.id,
+      title: title,
+      price: price,
+      quantity: quantity,
+      id: product._id,
     };
     onUpdateProduct(newProduct, clearInputs);
   };
@@ -28,24 +32,24 @@ const EditForm = ({ onUpdateProduct, product }) => {
   if (showEditForm) {
     return (
       <div className="add-form visible">
-        <h3>"Edit Product</h3>
+        <h3>Edit Product</h3>
         <form>
           <ProductInput
             title="Product Name"
             id="product-name"
-            state={stateProduct}
+            state={title}
             setState={setProduct}
           />
           <ProductInput
             title="Price"
             id="product-price"
-            state={statePrice}
+            state={price}
             setState={setPrice}
           />
           <ProductInput
             title="Quantity"
             id="product-quantity"
-            state={stateQuantity}
+            state={quantity}
             setState={setQuantity}
           />
           <div className="actions form-actions">
