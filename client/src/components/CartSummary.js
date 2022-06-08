@@ -1,4 +1,4 @@
-const CartSummary = ({ cartItems }) => {
+const CartSummary = ({ cartItems, onCheckoutCart }) => {
   return (
     <div className="cart">
       <h2>Your Cart</h2>
@@ -10,7 +10,9 @@ const CartSummary = ({ cartItems }) => {
       <a
         className={`button checkout ${
           cartItems.length === 0 ? 'disabled' : ''
-        }`}
+        }`
+      }
+      onClick={onCheckoutCart}
       >
         Checkout
       </a>

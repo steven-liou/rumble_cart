@@ -21,8 +21,7 @@ const App = () => {
 
   useEffect(() => {
     const fetchCartItems = async () => {
-      const res = await axios.get('/api/cart');
-      const data = await res.data;
+      const {data} = await axios.get('/api/cart');
       const cart = data.reduce((total, item) => {
         total[item.productId] = item;
         return total;
@@ -58,13 +57,14 @@ const App = () => {
   };
 
   const handleAddToCart = async (productId) => {
-    const res = await axios.post(`/api/add-to-cart`, { productId });
-    const { product: updatedProduct, item } = await res.data;
+    const {data} = await axios.post(`/api/add-to-cart`, { productId });
+    const { product: updatedProduct, item } = data;
 
+    if (!item) {
+      return;
+    }
     const cart = { ...cartItems };
-
-    cart[item.productId].quantity =
-      (cart[item.productId].quantity ? cart[item.productId].quantity : 0) + 1;
+    cart[item.productId] = item;
 
     setCartItems(cart);
     setProducts(
@@ -74,9 +74,14 @@ const App = () => {
     );
   };
 
+  const handleCheckoutCart = async () => {
+    const res = await axios.post('/api/checkout');
+    setCartItems({});
+  };
+
   return (
     <div id="app">
-      <Header cartItems={cartItems} />
+      <Header cartItems={cartItems} onCheckoutCart={handleCheckoutCart} />
       <main>
         <ProductDisplay
           products={products}
@@ -114,4 +119,36 @@ update product: PUT /products/:id
 Add to cart: POST /add-to-cart
 checkout POST /checkout
 cart GET /cart
+
+User Flow
+Your Cart - No Items
+  - Checkout Button is Disabled
+Your Cart - Has Items
+  - Check Out Button is Enabled
+    - Click on the Check Out Button
+      - all items from the cart are removed
+
+Implementation
+  - Event Handler -> pass down from (App?) down to the CartSummary (checkout Button)
+    - trigger that event handler
+      - POST Request to the API
+      - setCart({})
+
+
+## 1.6. POST /api/checkout
+- Removes items from the cart
+
+### 1.6.1. Expected Payload
+None
+
+### 1.6.2. Successful Response
+
+Empty json body
+
+#### 1.6.2.1. Example Response
+
+```json
+
+```
+
 */
