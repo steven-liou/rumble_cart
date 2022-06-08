@@ -1,4 +1,6 @@
-import AddProductForm from './AddProductForm';
+import AddForm from './AddForm';
+
+import { useState } from 'react';
 import ProductListing from './ProductListing';
 
 const ProductDisplay = ({
@@ -16,7 +18,7 @@ const ProductDisplay = ({
         onDeleteProduct={onDeleteProduct}
         onAddToCart={onAddToCart}
       />
-      <AddProductForm onAddProduct={onAddProduct} />
+      <AddForm onAddProduct={onAddProduct} />
     </div>
   );
 };

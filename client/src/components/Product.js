@@ -1,5 +1,4 @@
-import ToggleableEditForm from './ToggleableEditForm.js';
-
+import EditForm from './EditForm.js';
 const Product = ({
   product,
   onUpdateProduct,
@@ -21,17 +20,15 @@ const Product = ({
     <div className="product">
       <div className="product-details">
         <h3>{product.title}</h3>
-        <p className="price">${product.price}</p>
+        <p className="price">${product.price.toFixed(2)}</p>
         <p className="quantity">{product.quantity} left in stock</p>
         <div className="actions product-actions">
           <a className={`button add-to-cart ${product.quantity === 0 ? 'disabled' : ''}`} onClick={handleAddToCart}>
             Add to Cart
           </a>
-          {/* <a className="button edit">{ }</a> */}
-          <ToggleableEditForm
-            className="button edit"
+          <EditForm
             onUpdateProduct={onUpdateProduct}
-            productId={product._id}
+            product={product}
           />
         </div>
         <a className="delete-button" onClick={(e) => handleOnDeleteProduct(e)}>

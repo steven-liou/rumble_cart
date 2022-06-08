@@ -46,7 +46,7 @@ const SummaryTable = ({ cartItems }) => {
             <tr key={item._id}>
               <td>{item.title}</td>
               <td>{item.quantity}</td>
-              <td>${item.price}</td>
+              <td>${item.price.toFixed(2)}</td>
             </tr>
           );
         })}
@@ -54,7 +54,7 @@ const SummaryTable = ({ cartItems }) => {
       <tfoot>
         <tr>
           <td colSpan="3" className="total">
-            Total: ${total}
+            Total: ${total.toFixed(2)}
           </td>
         </tr>
       </tfoot>
