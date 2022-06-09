@@ -1,16 +1,9 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
-import { receiveCartItems } from '../actions/cartActions';
-const CartSummary = () => {
-  /*
-    useEffect -> set the initial state of the cartItems
-      - send a GET request to the database to retrieve all the cart items
-      - Trigger an Action Creator - Cart_Items_Received
-      - Reducer - return all the items from the cart as an Object
-         { itemid: {iteminfo} }
-  */
+import { receiveCartItems, checkoutCart } from '../actions/cartActions';
 
+const CartSummary = () => {
   const cartItems = useSelector((state) => state.cart);
   const dispatch = useDispatch();
 
@@ -42,7 +35,11 @@ const CartSummary = () => {
     fetchCartItems();
   }, []);
   */
-
+  const handleCheckoutCart = async (e) => {
+    e.preventDefault();
+    await axios.post('/api/checkout');
+    dispatch(checkoutCart());
+  };
   return (
     <div className="cart">
       <h2>Your Cart</h2>
@@ -55,6 +52,7 @@ const CartSummary = () => {
         className={`button checkout ${
           Object.keys(cartItems).length === 0 ? 'disabled' : ''
         }`}
+        onClick={handleCheckoutCart}
       >
         Checkout
       </a>

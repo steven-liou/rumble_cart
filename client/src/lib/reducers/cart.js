@@ -4,6 +4,9 @@ const cart = (state = {}, action) => {
     case 'CART_RECEIVED': {
       return action.payload;
     }
+    case 'CHECKOUT_CART': {
+      return {};
+    }
     default:
       return state;
   }

@@ -4,3 +4,5 @@ export const receiveCartItems = (cart) => {
     payload: cart,
   };
 };
+
+export const checkoutCart = () => ({ type: 'CHECKOUT_CART' });
