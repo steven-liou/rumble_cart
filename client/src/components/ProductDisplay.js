@@ -4,7 +4,6 @@ import { useState } from 'react';
 import ProductListing from './ProductListing';
 
 const ProductDisplay = ({
-  products,
   onAddProduct,
   onUpdateProduct,
   onDeleteProduct,
@@ -13,7 +12,6 @@ const ProductDisplay = ({
   return (
     <div>
       <ProductListing
-        products={products}
         onUpdateProduct={onUpdateProduct}
         onDeleteProduct={onDeleteProduct}
         onAddToCart={onAddToCart}

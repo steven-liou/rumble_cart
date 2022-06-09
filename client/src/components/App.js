@@ -1,20 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import Header from './Header';
 import ProductDisplay from './ProductDisplay';
-import axios from 'axios';
+import axios from 'axios'
 
 const App = () => {
-  const [products, setProducts] = useState([]);
+  
+
+  // const [products, setProducts] = useState([]);
+  // const setProducts = () => {};
   const [cartItems, setCartItems] = useState({});
 
-  useEffect(() => {
-    const fetchProducts = async () => {
-      const res = await axios.get('/api/products');
-      const data = res.data;
-      setProducts(data);
-    };
-    fetchProducts();
-  }, []);
 
   useEffect(() => {
     const fetchCartItems = async () => {
@@ -30,11 +25,13 @@ const App = () => {
 
   const handleAddProduct = async (newProduct, callback) => {
     const res = await axios.post('/api/products', newProduct);
+    /*
     setProducts(products.concat(res.data));
 
     if (callback) {
       callback();
     }
+    */
   };
 
   const handleUpdateProduct = async (updateProduct, callback) => {
@@ -44,20 +41,24 @@ const App = () => {
     );
     const data = res.data;
 
+    /*
     setProducts(
       products.map((product) => (product._id === data._id ? data : product))
     );
     if (callback) {
       callback();
     }
+    */
   };
 
   const handleDeleteProduct = async (productId, callback) => {
     await axios.delete(`/api/products/${productId}`);
+    /*
     setProducts(products.filter((product) => product._id !== productId));
     if (callback) {
       callback();
     }
+    */
   };
 
   const handleAddToCart = async (productId) => {
@@ -71,11 +72,13 @@ const App = () => {
     cart[item.productId] = item;
 
     setCartItems(cart);
+    /*
     setProducts(
       products.map((product) =>
         product._id === updatedProduct._id ? updatedProduct : product
       )
     );
+    */
   };
 
   const handleCheckoutCart = async () => {
@@ -88,7 +91,6 @@ const App = () => {
       <Header cartItems={cartItems} onCheckoutCart={handleCheckoutCart} />
       <main>
         <ProductDisplay
-          products={products}
           onAddProduct={handleAddProduct}
           onUpdateProduct={handleUpdateProduct}
           onDeleteProduct={handleDeleteProduct}
