@@ -2,11 +2,10 @@ import AddForm from './AddForm';
 
 import ProductListing from './ProductListing';
 
-const ProductDisplay = ({ onUpdateProduct, onDeleteProduct, onAddToCart }) => {
+const ProductDisplay = ({ onDeleteProduct, onAddToCart }) => {
   return (
     <div>
       <ProductListing
-        onUpdateProduct={onUpdateProduct}
         onDeleteProduct={onDeleteProduct}
         onAddToCart={onAddToCart}
       />

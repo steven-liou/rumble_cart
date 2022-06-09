@@ -11,3 +11,10 @@ export const addProduct = (product) => {
     payload: product,
   };
 };
+
+export const updateProduct = (updatedProduct) => {
+  return {
+    type: 'UPDATE_PRODUCT',
+    payload: updatedProduct,
+  };
+};

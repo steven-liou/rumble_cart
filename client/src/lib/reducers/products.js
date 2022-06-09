@@ -7,6 +7,12 @@ const products = (state = [], action) => {
     case 'ADD_PRODUCT': {
       return state.concat(action.payload);
     }
+    case 'UPDATE_PRODUCT': {
+      const id = action.payload._id;
+      return state.map((product) =>
+        product._id === id ? action.payload : product
+      );
+    }
     default:
       return state;
   }

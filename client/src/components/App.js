@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import Header from './Header';
 import ProductDisplay from './ProductDisplay';
-import axios from 'axios'
+import axios from 'axios';
 
 const App = () => {
   const [cartItems, setCartItems] = useState({});
-
 
   useEffect(() => {
     const fetchCartItems = async () => {
@@ -18,23 +17,6 @@ const App = () => {
     };
     fetchCartItems();
   }, []);
-
-  const handleUpdateProduct = async (updateProduct, callback) => {
-    const res = await axios.put(
-      `/api/products/${updateProduct.id}`,
-      updateProduct
-    );
-    const data = res.data;
-
-    /*
-    setProducts(
-      products.map((product) => (product._id === data._id ? data : product))
-    );
-    if (callback) {
-      callback();
-    }
-    */
-  };
 
   const handleDeleteProduct = async (productId, callback) => {
     await axios.delete(`/api/products/${productId}`);
@@ -76,7 +58,6 @@ const App = () => {
       <Header cartItems={cartItems} onCheckoutCart={handleCheckoutCart} />
       <main>
         <ProductDisplay
-          onUpdateProduct={handleUpdateProduct}
           onDeleteProduct={handleDeleteProduct}
           onAddToCart={handleAddToCart}
         />

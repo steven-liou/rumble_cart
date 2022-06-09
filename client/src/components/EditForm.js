@@ -1,31 +1,36 @@
 import ProductInput from './ProductInput';
+import { useDispatch } from 'react-redux';
 import { useState } from 'react';
+import { updateProduct } from '../actions/productActions';
+import axios from 'axios';
 
-const EditForm = ({ onUpdateProduct, product }) => {
+const EditForm = ({ product }) => {
   const [showEditForm, setShowEditForm] = useState(false);
   const [title, setProduct] = useState(product.title);
   const [price, setPrice] = useState(product.price);
   const [quantity, setQuantity] = useState(product.quantity);
 
-  const handleSubmit = (e) => {
+  const dispatch = useDispatch();
+
+  const handleUpdateProduct = async (e) => {
     e.preventDefault();
     if (!(title && price && quantity)) {
       alert('All fields must be filled');
       return;
     }
-    const newProduct = {
+    const updatedProduct = {
       title: title,
       price: price,
       quantity: quantity,
       id: product._id,
     };
-    onUpdateProduct(newProduct, clearInputs);
-  };
 
-  const clearInputs = () => {
-    setProduct('');
-    setPrice('');
-    setQuantity('');
+    const res = await axios.put(
+      `/api/products/${updatedProduct.id}`,
+      updatedProduct
+    );
+
+    dispatch(updateProduct(res.data));
     setShowEditForm(false);
   };
 
@@ -53,7 +58,7 @@ const EditForm = ({ onUpdateProduct, product }) => {
             setState={setQuantity}
           />
           <div className="actions form-actions">
-            <a className="button" onClick={(e) => handleSubmit(e)}>
+            <a className="button" onClick={(e) => handleUpdateProduct(e)}>
               Update
             </a>
             <a className="button" onClick={() => setShowEditForm(false)}>
@@ -65,9 +70,9 @@ const EditForm = ({ onUpdateProduct, product }) => {
     );
   } else {
     return (
-        <a className="button edit" onClick={() => setShowEditForm(true)}>
-          Edit
-        </a>
+      <a className="button edit" onClick={() => setShowEditForm(true)}>
+        Edit
+      </a>
     );
   }
 };
