@@ -1,15 +1,12 @@
-import CartSummary from './CartSummary'
+import CartSummary from './CartSummary';
 
-const Header = ({ cartItems, onCheckoutCart }) => {
+const Header = () => {
   return (
     <header>
       <h1>The Shop!</h1>
-      <CartSummary 
-        cartItems={cartItems} 
-        onCheckoutCart={onCheckoutCart}
-      />
+      <CartSummary />
     </header>
   );
 };
- 
+
 export default Header;
