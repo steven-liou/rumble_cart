@@ -13,6 +13,10 @@ const products = (state = [], action) => {
         product._id === id ? action.payload : product
       );
     }
+    case 'DELETE_PRODUCT': {
+      const id = action.payload;
+      return state.filter((product) => product._id !== id);
+    }
     default:
       return state;
   }

@@ -2,11 +2,10 @@ import AddForm from './AddForm';
 
 import ProductListing from './ProductListing';
 
-const ProductDisplay = ({ onDeleteProduct, onAddToCart }) => {
+const ProductDisplay = ({ onAddToCart }) => {
   return (
     <div>
       <ProductListing
-        onDeleteProduct={onDeleteProduct}
         onAddToCart={onAddToCart}
       />
       <AddForm />

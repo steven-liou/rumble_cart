@@ -18,3 +18,10 @@ export const updateProduct = (updatedProduct) => {
     payload: updatedProduct,
   };
 };
+
+export const deleteProduct = (productID) => {
+  return {
+    type: 'DELETE_PRODUCT',
+    payload: productID,
+  };
+};

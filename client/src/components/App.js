@@ -18,15 +18,7 @@ const App = () => {
     fetchCartItems();
   }, []);
 
-  const handleDeleteProduct = async (productId, callback) => {
-    await axios.delete(`/api/products/${productId}`);
-    /*
-    setProducts(products.filter((product) => product._id !== productId));
-    if (callback) {
-      callback();
-    }
-    */
-  };
+
 
   const handleAddToCart = async (productId) => {
     const { data } = await axios.post(`/api/add-to-cart`, { productId });
@@ -58,7 +50,6 @@ const App = () => {
       <Header cartItems={cartItems} onCheckoutCart={handleCheckoutCart} />
       <main>
         <ProductDisplay
-          onDeleteProduct={handleDeleteProduct}
           onAddToCart={handleAddToCart}
         />
       </main>

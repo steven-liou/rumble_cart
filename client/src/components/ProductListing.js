@@ -4,7 +4,7 @@ import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { productsReceived } from '../actions/productActions';
 
-const ProductListing = ({ onDeleteProduct, onAddToCart }) => {
+const ProductListing = ({ onAddToCart }) => {
   const dispatch = useDispatch();
 
   const products = useSelector((state) => state.products);
@@ -25,7 +25,6 @@ const ProductListing = ({ onDeleteProduct, onAddToCart }) => {
           <Product
             key={product._id}
             product={product}
-            onDeleteProduct={onDeleteProduct}
             onAddToCart={onAddToCart}
           />
         );
