@@ -4,10 +4,6 @@ import ProductDisplay from './ProductDisplay';
 import axios from 'axios'
 
 const App = () => {
-  
-
-  // const [products, setProducts] = useState([]);
-  // const setProducts = () => {};
   const [cartItems, setCartItems] = useState({});
 
 
@@ -22,17 +18,6 @@ const App = () => {
     };
     fetchCartItems();
   }, []);
-
-  const handleAddProduct = async (newProduct, callback) => {
-    const res = await axios.post('/api/products', newProduct);
-    /*
-    setProducts(products.concat(res.data));
-
-    if (callback) {
-      callback();
-    }
-    */
-  };
 
   const handleUpdateProduct = async (updateProduct, callback) => {
     const res = await axios.put(
@@ -91,7 +76,6 @@ const App = () => {
       <Header cartItems={cartItems} onCheckoutCart={handleCheckoutCart} />
       <main>
         <ProductDisplay
-          onAddProduct={handleAddProduct}
           onUpdateProduct={handleUpdateProduct}
           onDeleteProduct={handleDeleteProduct}
           onAddToCart={handleAddToCart}

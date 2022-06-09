@@ -4,6 +4,9 @@ const products = (state = [], action) => {
     case 'PRODUCTS_RECEIVED': {
       return action.payload;
     }
+    case 'ADD_PRODUCT': {
+      return state.concat(action.payload);
+    }
     default:
       return state;
   }

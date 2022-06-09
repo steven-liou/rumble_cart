@@ -16,6 +16,7 @@ const ProductListing = ({ onUpdateProduct, onDeleteProduct, onAddToCart }) => {
     };
     fetchProducts();
   }, [dispatch]);
+
   return (
     <div className="product-listing">
       <h2>Products</h2>

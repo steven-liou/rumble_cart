@@ -1,7 +1,10 @@
 import { useState } from 'react';
 import ProductInput from './ProductInput';
+import { useDispatch } from 'react-redux';
+import axios from 'axios';
+import { addProduct } from '../actions/productActions';
 
-const AddForm = ({ onAddProduct }) => {
+const AddForm = () => {
   const [addFormVisible, setAddFormVisible] = useState(false);
   const [title, setTitle] = useState('');
   const [price, setPrice] = useState('');
@@ -14,19 +17,23 @@ const AddForm = ({ onAddProduct }) => {
     setAddFormVisible(false);
   };
 
-  const handleAddProduct = (event) => {
+  const dispatch = useDispatch();
+
+  const handleAddProduct = async (event) => {
     event.preventDefault();
     if (!(title && price && quantity)) {
       alert('All fields must be filled');
-      return
+      return;
     }
     const newProduct = {
       title,
       price,
       quantity,
     };
+    const res = await axios.post('/api/products', newProduct);
 
-    onAddProduct(newProduct, clearInputs);
+    dispatch(addProduct(res.data));
+    clearInputs();
   };
 
   return (
@@ -41,7 +48,6 @@ const AddForm = ({ onAddProduct }) => {
       </p>
       <h3>Add Product</h3>
 
-      
       <form>
         <ProductInput
           title="Product Name"
