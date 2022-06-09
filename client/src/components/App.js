@@ -111,14 +111,6 @@ App (Cart State, Product State)
         - Edit Form Component
     Add A Product
 
-ToggleableForm
-  EditForm
-
-ToggleableForm
-  isVisible
-  if visible
-    ProductForm
-
 useEffect triggered after the Component mounts to the VirtualDOM
 React Component Lifecycle
 

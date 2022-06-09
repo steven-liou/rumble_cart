@@ -65,11 +65,9 @@ const EditForm = ({ onUpdateProduct, product }) => {
     );
   } else {
     return (
-      <p>
         <a className="button edit" onClick={() => setShowEditForm(true)}>
           Edit
         </a>
-      </p>
     );
   }
 };
