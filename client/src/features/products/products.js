@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import apiClient from '../../lib/apiClient';
+import { addProductToCart } from '../cart/cart';
 
 export const fetchProducts = createAsyncThunk(
   'products/fetchProducts',
@@ -63,6 +64,15 @@ const productsSlice = createSlice({
     builder.addCase(deleteProduct.fulfilled, (state, action) => {
       const deletedProductId = action.payload;
       return state.filter((product) => product._id !== deletedProductId);
+    });
+    builder.addCase(addProductToCart.fulfilled, (state, action) => {
+      const updatedProduct = action.payload.product;
+      if (!updateProduct) {
+        return state;
+      }
+      return state.map((product) =>
+        product._id === updatedProduct._id ? updatedProduct : product
+      );
     });
   },
 });

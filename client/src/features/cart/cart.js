@@ -8,6 +8,18 @@ export const fetchCart = createAsyncThunk('/cart/fetchCart', async () => {
   return data;
 });
 
+export const checkoutCart = createAsyncThunk('/cart/checkoutCart', async () => {
+  await apiClient.checkoutCart();
+});
+
+export const addProductToCart = createAsyncThunk(
+  '/cart/addProductToCart',
+  async (productId) => {
+    const data = await apiClient.addProductToCart(productId);
+    return data;
+  }
+);
+
 const cartSlice = createSlice({
   name: 'cart',
   initialState,
@@ -15,6 +27,18 @@ const cartSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(fetchCart.fulfilled, (state, action) => {
       return action.payload;
+    });
+    builder.addCase(checkoutCart.fulfilled, (state, action) => {
+      return {};
+    });
+    builder.addCase(addProductToCart.fulfilled, (state, action) => {
+      const item = action.payload.item;
+      if (!item) {
+        return state;
+      }
+      const cart = { ...state };
+      cart[item.productId] = item;
+      return cart;
     });
   },
 });

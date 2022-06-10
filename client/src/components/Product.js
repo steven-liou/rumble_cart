@@ -2,7 +2,7 @@ import EditForm from './EditForm.js';
 import { useDispatch } from 'react-redux';
 import axios from 'axios';
 import { deleteProduct } from '../features/products/products';
-import { addProductToCart } from '../actions/cartActions';
+import { addProductToCart } from '../features/cart/cart';
 
 const Product = ({ product, onAddToCart }) => {
   const dispatch = useDispatch();
@@ -20,21 +20,13 @@ const Product = ({ product, onAddToCart }) => {
 
   const handleAddToCart = async (e) => {
     e.preventDefault();
-
-    const { data } = await axios.post(`/api/add-to-cart`, { productId });
-    const { product: updatedProduct, item } = data;
-
-    if (!item) {
-      return;
-    }
-
-    dispatch(addProductToCart({ updatedProduct, item }));
+    dispatch(addProductToCart(product._id));
   };
 
   return (
     <div className="product">
       <div className="product-details">
-        <h3>{product.title}</h3>
+        <h3>{product.title}</h3>p
         <p className="price">${product.price && product.price.toFixed(2)}</p>
         <p className="quantity">{product.quantity} left in stock</p>
         <div className="actions product-actions">

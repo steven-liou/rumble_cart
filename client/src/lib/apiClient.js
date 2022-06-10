@@ -31,10 +31,21 @@ const fetchCart = async () => {
   return cart;
 };
 
+const addProductToCart = async (productId) => {
+  const res = await axios.post('/api/add-to-cart', { productId });
+  return res.data;
+};
+
+const checkoutCart = async () => {
+  await axios.post('/api/cart/checkout');
+};
+
 export default {
   fetchProducts,
   addProduct,
   updateProduct,
   deleteProduct,
   fetchCart,
+  addProductToCart,
+  checkoutCart,
 };
