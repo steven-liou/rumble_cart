@@ -26,7 +26,7 @@ const Product = ({ product, onAddToCart }) => {
   return (
     <div className="product">
       <div className="product-details">
-        <h3>{product.title}</h3>p
+        <h3>{product.title}</h3>
         <p className="price">${product.price && product.price.toFixed(2)}</p>
         <p className="quantity">{product.quantity} left in stock</p>
         <div className="actions product-actions">

@@ -16,7 +16,6 @@ const CartSummary = () => {
 
   const handleCheckoutCart = async (e) => {
     e.preventDefault();
-
     dispatch(checkoutCart());
   };
   return (
