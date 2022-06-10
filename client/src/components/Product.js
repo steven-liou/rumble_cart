@@ -4,6 +4,7 @@ import axios from 'axios';
 import { deleteProduct } from '../actions/productActions';
 import { addProductToCart } from '../actions/cartActions';
 
+
 const Product = ({ product, onAddToCart }) => {
   const dispatch = useDispatch();
   const productId = product._id;

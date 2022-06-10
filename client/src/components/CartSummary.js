@@ -6,24 +6,17 @@ import {
   checkoutCart,
   addProductToCart,
 } from '../actions/cartActions';
+import { fetchCart } from '../features/cart/cart';
 
 const CartSummary = () => {
-  const cartItems = useSelector((state) => state.cart);
+  const cartItems = useSelector((state) => {
+    return state.cart;
+  });
   const dispatch = useDispatch();
 
   useEffect(() => {
-    const fetchCartItems = async () => {
-      const { data } = await axios.get('/api/cart');
-      const cart = data.reduce((total, item) => {
-        total[item.productId] = item;
-        return total;
-      }, {});
-
-      dispatch(receiveCartItems(cart));
-    };
-    fetchCartItems();
+    dispatch(fetchCart());
   }, [dispatch]);
-
 
   const handleCheckoutCart = async (e) => {
     e.preventDefault();

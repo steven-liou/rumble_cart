@@ -3,18 +3,14 @@ import axios from 'axios';
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { productsReceived } from '../actions/productActions';
+import { fetchProducts } from '../features/products/products';
 
 const ProductListing = ({ onAddToCart }) => {
   const dispatch = useDispatch();
 
   const products = useSelector((state) => state.products);
   useEffect(() => {
-    const fetchProducts = async () => {
-      const res = await axios.get('/api/products');
-      const data = res.data;
-      dispatch(productsReceived(data));
-    };
-    fetchProducts();
+    dispatch(fetchProducts())
   }, [dispatch]);
 
   return (
