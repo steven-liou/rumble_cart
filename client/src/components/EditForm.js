@@ -1,7 +1,7 @@
 import ProductInput from './ProductInput';
 import { useDispatch } from 'react-redux';
 import { useState } from 'react';
-import { updateProduct } from '../actions/productActions';
+import { updateProduct } from '../features/products/products';
 import axios from 'axios';
 
 const EditForm = ({ product }) => {
@@ -25,13 +25,10 @@ const EditForm = ({ product }) => {
       id: product._id,
     };
 
-    const res = await axios.put(
-      `/api/products/${updatedProduct.id}`,
-      updatedProduct
+    const hideEditForm = () => setShowEditForm(false);
+    dispatch(
+      updateProduct({ callback: hideEditForm, product: updatedProduct })
     );
-
-    dispatch(updateProduct(res.data));
-    setShowEditForm(false);
   };
 
   if (showEditForm) {

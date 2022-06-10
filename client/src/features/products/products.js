@@ -22,6 +22,17 @@ export const addProduct = createAsyncThunk(
   }
 );
 
+export const updateProduct = createAsyncThunk(
+  'products/updateProduct',
+  async ({ callback, product }) => {
+    const data = await apiClient.updateProduct(product);
+    if (callback) {
+      callback();
+    }
+    return data;
+  }
+);
+
 const initialState = [];
 
 const productsSlice = createSlice({
@@ -34,6 +45,12 @@ const productsSlice = createSlice({
     });
     builder.addCase(addProduct.fulfilled, (state, action) => {
       return state.concat(action.payload);
+    });
+    builder.addCase(updateProduct.fulfilled, (state, action) => {
+      const updatedProduct = action.payload;
+      return state.map((product) =>
+        product._id === updatedProduct._id ? updatedProduct : product
+      );
     });
   },
 });

@@ -10,7 +10,7 @@ const addProduct = async (newProduct) => {
   return res.data;
 };
 
-const editProduct = async (updatedProduct) => {
+const updateProduct = async (updatedProduct) => {
   const res = await axios.put(
     `/api/products/${updatedProduct.id}`,
     updatedProduct
@@ -31,4 +31,10 @@ const fetchCart = async () => {
   return cart;
 };
 
-export default { fetchProducts, addProduct, editProduct, fetchCart };
+export default {
+  fetchProducts,
+  addProduct,
+  updateProduct,
+  deleteProduct,
+  fetchCart,
+};
