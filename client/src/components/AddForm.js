@@ -1,8 +1,7 @@
 import { useState } from 'react';
 import ProductInput from './ProductInput';
 import { useDispatch } from 'react-redux';
-import axios from 'axios';
-import { addProduct } from '../actions/productActions';
+import { addProduct } from '../features/products/products';
 
 const AddForm = () => {
   const [addFormVisible, setAddFormVisible] = useState(false);
@@ -30,10 +29,8 @@ const AddForm = () => {
       price,
       quantity,
     };
-    const res = await axios.post('/api/products', newProduct);
 
-    dispatch(addProduct(res.data));
-    clearInputs();
+    dispatch(addProduct({ callback: clearInputs, product: newProduct }));
   };
 
   return (

@@ -9,6 +9,19 @@ export const fetchProducts = createAsyncThunk(
   }
 );
 
+export const addProduct = createAsyncThunk(
+  'products/addProduct',
+  async (arg) => {
+    const { callback, product } = arg;
+    const data = await apiClient.addProduct(product);
+
+    if (callback) {
+      callback();
+    }
+    return data;
+  }
+);
+
 const initialState = [];
 
 const productsSlice = createSlice({
@@ -18,6 +31,9 @@ const productsSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(fetchProducts.fulfilled, (state, action) => {
       return action.payload;
+    });
+    builder.addCase(addProduct.fulfilled, (state, action) => {
+      return state.concat(action.payload);
     });
   },
 });
