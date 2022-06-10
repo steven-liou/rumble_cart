@@ -2,9 +2,11 @@ import EditForm from './EditForm.js';
 import { useDispatch } from 'react-redux';
 import axios from 'axios';
 import { deleteProduct } from '../actions/productActions';
+import { addProductToCart } from '../actions/cartActions';
 
 const Product = ({ product, onAddToCart }) => {
   const dispatch = useDispatch();
+  const productId = product._id;
 
   const handleOnDeleteProduct = async (e) => {
     e.preventDefault();
@@ -13,15 +15,22 @@ const Product = ({ product, onAddToCart }) => {
       return;
     }
 
-    const productID = product._id;
-    await axios.delete(`/api/products/${productID}`);
+    await axios.delete(`/api/products/${productId}`);
 
-    dispatch(deleteProduct(productID));
+    dispatch(deleteProduct(productId));
   };
 
-  const handleAddToCart = (e) => {
+  const handleAddToCart = async (e) => {
     e.preventDefault();
-    onAddToCart(product._id);
+
+    const { data } = await axios.post(`/api/add-to-cart`, { productId });
+    const { product: updatedProduct, item } = data;
+
+    if (!item) {
+      return;
+    }
+
+    dispatch(addProductToCart({ updatedProduct, item }));
   };
 
   return (

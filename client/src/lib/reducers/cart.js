@@ -1,4 +1,3 @@
-// initial state for the cart -> useEffect -> fetch all the cart items
 const cart = (state = {}, action) => {
   switch (action.type) {
     case 'CART_RECEIVED': {
@@ -6,6 +5,11 @@ const cart = (state = {}, action) => {
     }
     case 'CHECKOUT_CART': {
       return {};
+    }
+    case 'ADD_PRODUCT_TO_CART': {
+      const cart = { ...state };
+      cart[action.payload.item.productId] = action.payload.item;
+      return cart;
     }
     default:
       return state;

@@ -1,4 +1,3 @@
-// initial state for the products -> useEffect -> fetch all the products
 const products = (state = [], action) => {
   switch (action.type) {
     case 'PRODUCTS_RECEIVED': {
@@ -16,6 +15,12 @@ const products = (state = [], action) => {
     case 'DELETE_PRODUCT': {
       const id = action.payload;
       return state.filter((product) => product._id !== id);
+    }
+    case 'ADD_PRODUCT_TO_CART': {
+      const updatedProduct = action.payload.updatedProduct;
+      return state.map((product) =>
+        product._id === updatedProduct._id ? updatedProduct : product
+      );
     }
     default:
       return state;
