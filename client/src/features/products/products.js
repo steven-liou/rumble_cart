@@ -33,6 +33,14 @@ export const updateProduct = createAsyncThunk(
   }
 );
 
+export const deleteProduct = createAsyncThunk(
+  'products/deleteProduct',
+  async (productId) => {
+    await apiClient.deleteProduct(productId);
+    return productId;
+  }
+);
+
 const initialState = [];
 
 const productsSlice = createSlice({
@@ -51,6 +59,10 @@ const productsSlice = createSlice({
       return state.map((product) =>
         product._id === updatedProduct._id ? updatedProduct : product
       );
+    });
+    builder.addCase(deleteProduct.fulfilled, (state, action) => {
+      const deletedProductId = action.payload;
+      return state.filter((product) => product._id !== deletedProductId);
     });
   },
 });

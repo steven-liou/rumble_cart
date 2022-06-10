@@ -1,9 +1,8 @@
 import EditForm from './EditForm.js';
 import { useDispatch } from 'react-redux';
 import axios from 'axios';
-import { deleteProduct } from '../actions/productActions';
+import { deleteProduct } from '../features/products/products';
 import { addProductToCart } from '../actions/cartActions';
-
 
 const Product = ({ product, onAddToCart }) => {
   const dispatch = useDispatch();
@@ -15,8 +14,6 @@ const Product = ({ product, onAddToCart }) => {
     if (!window.confirm(`Are you sure you want to delete ${product.title} ?`)) {
       return;
     }
-
-    await axios.delete(`/api/products/${productId}`);
 
     dispatch(deleteProduct(productId));
   };
