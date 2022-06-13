@@ -1,11 +1,14 @@
+import { useEffect, useContext } from 'react';
 import Product from './Product';
+import { ProductContext, fetchProducts } from '../context/products-context';
 
-const ProductListing = ({
-  products,
-  onUpdateProduct,
-  onDeleteProduct,
-  onAddToCart,
-}) => {
+const ProductListing = ({ onUpdateProduct, onDeleteProduct, onAddToCart }) => {
+  const { products, dispatch } = useContext(ProductContext);
+
+  useEffect(() => {
+    fetchProducts(dispatch);
+  }, [dispatch]);
+
   return (
     <div className="product-listing">
       <h2>Products</h2>

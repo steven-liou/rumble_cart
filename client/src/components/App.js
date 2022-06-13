@@ -4,17 +4,7 @@ import ProductDisplay from './ProductDisplay';
 import axios from 'axios';
 
 const App = () => {
-  const [products, setProducts] = useState([]);
   const [cartItems, setCartItems] = useState({});
-
-  useEffect(() => {
-    const fetchProducts = async () => {
-      const res = await axios.get('/api/products');
-      const data = res.data;
-      setProducts(data);
-    };
-    fetchProducts();
-  }, []);
 
   useEffect(() => {
     const fetchCartItems = async () => {
@@ -28,6 +18,7 @@ const App = () => {
     fetchCartItems();
   }, []);
 
+  /*
   const handleAddProduct = async (newProduct, callback) => {
     const res = await axios.post('/api/products', newProduct);
     setProducts(products.concat(res.data));
@@ -83,17 +74,12 @@ const App = () => {
     setCartItems({});
   };
 
+  */
   return (
     <div id="app">
-      <Header cartItems={cartItems} onCheckoutCart={handleCheckoutCart} />
+      <Header cartItems={cartItems} />
       <main>
-        <ProductDisplay
-          products={products}
-          onAddProduct={handleAddProduct}
-          onUpdateProduct={handleUpdateProduct}
-          onDeleteProduct={handleDeleteProduct}
-          onAddToCart={handleAddToCart}
-        />
+        <ProductDisplay />
       </main>
     </div>
   );
