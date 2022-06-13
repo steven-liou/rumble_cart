@@ -1,5 +1,4 @@
 import AddForm from './AddForm';
-
 import ProductListing from './ProductListing';
 
 const ProductDisplay = () => {

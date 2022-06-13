@@ -1,11 +1,14 @@
 import ProductInput from './ProductInput';
-import { useState } from 'react';
+import { useState, useContext } from 'react';
+
+import { ProductContext, editProduct } from '../context/products-context';
 
 const EditForm = ({ onUpdateProduct, product }) => {
   const [showEditForm, setShowEditForm] = useState(false);
   const [title, setProduct] = useState(product.title);
   const [price, setPrice] = useState(product.price);
   const [quantity, setQuantity] = useState(product.quantity);
+  const { dispatch } = useContext(ProductContext);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -13,13 +16,14 @@ const EditForm = ({ onUpdateProduct, product }) => {
       alert('All fields must be filled');
       return;
     }
-    const newProduct = {
+    const editedProduct = {
       title: title,
       price: price,
       quantity: quantity,
       id: product._id,
     };
-    onUpdateProduct(newProduct, clearInputs);
+
+    editProduct(editedProduct, dispatch, clearInputs);
   };
 
   const clearInputs = () => {
@@ -65,9 +69,9 @@ const EditForm = ({ onUpdateProduct, product }) => {
     );
   } else {
     return (
-        <a className="button edit" onClick={() => setShowEditForm(true)}>
-          Edit
-        </a>
+      <a className="button edit" onClick={() => setShowEditForm(true)}>
+        Edit
+      </a>
     );
   }
 };
