@@ -18,63 +18,6 @@ const App = () => {
     fetchCartItems();
   }, []);
 
-  /*
-  const handleAddProduct = async (newProduct, callback) => {
-    const res = await axios.post('/api/products', newProduct);
-    setProducts(products.concat(res.data));
-
-    if (callback) {
-      callback();
-    }
-  };
-
-  const handleUpdateProduct = async (updateProduct, callback) => {
-    const res = await axios.put(
-      `/api/products/${updateProduct.id}`,
-      updateProduct
-    );
-    const data = res.data;
-
-    setProducts(
-      products.map((product) => (product._id === data._id ? data : product))
-    );
-    if (callback) {
-      callback();
-    }
-  };
-
-  const handleDeleteProduct = async (productId, callback) => {
-    await axios.delete(`/api/products/${productId}`);
-    setProducts(products.filter((product) => product._id !== productId));
-    if (callback) {
-      callback();
-    }
-  };
-
-  const handleAddToCart = async (productId) => {
-    const { data } = await axios.post(`/api/add-to-cart`, { productId });
-    const { product: updatedProduct, item } = data;
-
-    if (!item) {
-      return;
-    }
-    const cart = { ...cartItems };
-    cart[item.productId] = item;
-
-    setCartItems(cart);
-    setProducts(
-      products.map((product) =>
-        product._id === updatedProduct._id ? updatedProduct : product
-      )
-    );
-  };
-
-  const handleCheckoutCart = async () => {
-    const res = await axios.post('/api/checkout');
-    setCartItems({});
-  };
-
-  */
   return (
     <div id="app">
       <Header cartItems={cartItems} />

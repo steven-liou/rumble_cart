@@ -3,7 +3,7 @@ import { useState, useContext } from 'react';
 
 import { ProductContext, editProduct } from '../context/products-context';
 
-const EditForm = ({ onUpdateProduct, product }) => {
+const EditForm = ({ product }) => {
   const [showEditForm, setShowEditForm] = useState(false);
   const [title, setProduct] = useState(product.title);
   const [price, setPrice] = useState(product.price);

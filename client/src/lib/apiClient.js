@@ -28,4 +28,9 @@ const editProduct = async (editedProduct) => {
   return product;
 };
 
-export default { fetchProducts, addProduct, editProduct };
+const deleteProduct = async (productId) => {
+  await axios.delete(`api/products/${productId}`);
+  return;
+};
+
+export default { fetchProducts, addProduct, editProduct, deleteProduct };

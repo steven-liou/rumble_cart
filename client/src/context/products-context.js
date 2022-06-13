@@ -14,8 +14,12 @@ export const ProductsReducer = (state, action) => {
     }
     case 'PRODUCT_EDITED': {
       return state.map((product) =>
-        product._id === action.payload._id ? action.payload : product
+        product.id === action.payload.id ? action.payload : product
       );
+    }
+    case 'PRODUCT_DELETED': {
+      const deletedProductId = action.payload;
+      return state.filter((product) => product.id !== deletedProductId);
     }
     default: {
       return state;
@@ -44,6 +48,12 @@ export const editProduct = async (editedProduct, dispatch, callback) => {
   if (callback) {
     callback();
   }
+};
+
+export const deleteProduct = async (productId, dispatch) => {
+  await apiClient.deleteProduct(productId);
+
+  dispatch({ type: 'PRODUCT_DELETED', payload: productId });
 };
 
 export const ProductProvider = ({ children }) => {
