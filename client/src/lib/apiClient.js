@@ -39,12 +39,17 @@ const fetchCart = async () => {
   return cartItems;
 };
 
+const checkoutCart = async () => {
+  await axios.post('/api/checkout');
+};
+
 const apiClient = {
   fetchProducts,
   addProduct,
   editProduct,
   deleteProduct,
   fetchCart,
+  checkoutCart,
 };
 
 export default apiClient;

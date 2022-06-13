@@ -1,5 +1,5 @@
 import { useContext, useEffect } from 'react';
-import { CartContext, fetchCart } from '../context/cart-context';
+import { CartContext, fetchCart, checkoutCart } from '../context/cart-context';
 
 const CartSummary = () => {
   const { cart: cartItems, dispatch: dispatchCart } = useContext(CartContext);
@@ -8,7 +8,9 @@ const CartSummary = () => {
     fetchCart(dispatchCart);
   }, [dispatchCart]);
 
-  const handleCheckout = () => {};
+  const handleCheckout = () => {
+    checkoutCart(dispatchCart);
+  };
 
   return (
     <div className="cart">
