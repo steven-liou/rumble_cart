@@ -19,17 +19,13 @@ const addProduct = async (product) => {
   return addedProduct;
 };
 
-const editProduct = async (editedProduct, dispatch, callback) => {
+const editProduct = async (editedProduct) => {
   const { data } = await axios.put(
     `/api/products/${editedProduct.id}`,
     editedProduct
   );
   const product = productWithId(data);
-  dispatch({ type: 'PRODUCT_EDITED', payload: product });
-
-  if (callback) {
-    callback();
-  }
+  return product;
 };
 
 export default { fetchProducts, addProduct, editProduct };

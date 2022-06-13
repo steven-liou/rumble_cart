@@ -20,7 +20,7 @@ const EditForm = ({ onUpdateProduct, product }) => {
       title: title,
       price: price,
       quantity: quantity,
-      id: product._id,
+      id: product.id,
     };
 
     editProduct(editedProduct, dispatch, clearInputs);

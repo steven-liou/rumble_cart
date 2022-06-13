@@ -15,7 +15,7 @@ const ProductListing = ({ onUpdateProduct, onDeleteProduct, onAddToCart }) => {
       {products.map((product) => {
         return (
           <Product
-            key={product._id}
+            key={product.id}
             product={product}
             onUpdateProduct={onUpdateProduct}
             onDeleteProduct={onDeleteProduct}

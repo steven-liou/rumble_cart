@@ -38,11 +38,8 @@ export const addProduct = async (product, dispatch, callback) => {
 };
 
 export const editProduct = async (editedProduct, dispatch, callback) => {
-  const { data } = await axios.put(
-    `/api/products/${editedProduct.id}`,
-    editedProduct
-  );
-  dispatch({ type: 'PRODUCT_EDITED', payload: data });
+  const savedProduct = await apiClient.editProduct(editedProduct);
+  dispatch({ type: 'PRODUCT_EDITED', payload: savedProduct });
 
   if (callback) {
     callback();
