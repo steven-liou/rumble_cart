@@ -1,17 +1,28 @@
-const CartSummary = ({ cartItems, onCheckoutCart }) => {
+import { useContext, useEffect } from 'react';
+import { CartContext, fetchCart } from '../context/cart-context';
+
+const CartSummary = () => {
+  const { cart: cartItems, dispatch: dispatchCart } = useContext(CartContext);
+
+  useEffect(() => {
+    fetchCart(dispatchCart);
+  }, [dispatchCart]);
+
+  const handleCheckout = () => {};
+
   return (
     <div className="cart">
       <h2>Your Cart</h2>
-      {Object.keys(cartItems).length === 0 ? (
+      {cartItems.length === 0 ? (
         <EmptyCartSummary />
       ) : (
         <SummaryTable cartItems={cartItems} />
       )}
       <a
         className={`button checkout ${
-          Object.keys(cartItems).length === 0 ? 'disabled' : ''
+          cartItems.length === 0 ? 'disabled' : ''
         }`}
-        onClick={onCheckoutCart}
+        onClick={handleCheckout}
       >
         Checkout
       </a>
@@ -29,7 +40,6 @@ const EmptyCartSummary = () => {
 };
 
 const SummaryTable = ({ cartItems }) => {
-  cartItems = Object.values(cartItems);
   const total = cartItems.reduce((sum, item) => sum + item.price, 0);
   return (
     <table className="cart-items">

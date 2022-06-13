@@ -1,5 +1,4 @@
-import { createContext, useContext, useReducer } from 'react';
-import axios from 'axios';
+import { createContext, useReducer } from 'react';
 import apiClient from '../lib/apiClient';
 
 export const ProductContext = createContext();

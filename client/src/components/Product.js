@@ -13,7 +13,7 @@ const Product = ({ product, onAddToCart }) => {
 
   const handleAddToCart = (e) => {
     e.preventDefault();
-    onAddToCart(product._id);
+    onAddToCart(product.id);
   };
   return (
     <div className="product">

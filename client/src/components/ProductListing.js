@@ -3,11 +3,11 @@ import Product from './Product';
 import { ProductContext, fetchProducts } from '../context/products-context';
 
 const ProductListing = () => {
-  const { products, dispatch } = useContext(ProductContext);
+  const { products, dispatch: dispatchProduct } = useContext(ProductContext);
 
   useEffect(() => {
-    fetchProducts(dispatch);
-  }, [dispatch]);
+    fetchProducts(dispatchProduct);
+  }, [dispatchProduct]);
 
   return (
     <div className="product-listing">

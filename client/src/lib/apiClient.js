@@ -33,4 +33,18 @@ const deleteProduct = async (productId) => {
   return;
 };
 
-export default { fetchProducts, addProduct, editProduct, deleteProduct };
+const fetchCart = async () => {
+  const { data } = await axios.get('/api/cart');
+  const cartItems = data.map((product) => productWithId(product));
+  return cartItems;
+};
+
+const apiClient = {
+  fetchProducts,
+  addProduct,
+  editProduct,
+  deleteProduct,
+  fetchCart,
+};
+
+export default apiClient;
