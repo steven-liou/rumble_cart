@@ -1,11 +1,14 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import ProductInput from './ProductInput';
+import { addProduct } from '../context/products-context';
+import { ProductContext } from '../context/products-context';
 
-const AddForm = ({ onAddProduct }) => {
+const AddForm = () => {
   const [addFormVisible, setAddFormVisible] = useState(false);
   const [title, setTitle] = useState('');
   const [price, setPrice] = useState('');
   const [quantity, setQuantity] = useState('');
+  const { dispatch: productDispatch } = useContext(ProductContext);
 
   const clearInputs = () => {
     setTitle('');
@@ -18,7 +21,7 @@ const AddForm = ({ onAddProduct }) => {
     event.preventDefault();
     if (!(title && price && quantity)) {
       alert('All fields must be filled');
-      return
+      return;
     }
     const newProduct = {
       title,
@@ -26,7 +29,7 @@ const AddForm = ({ onAddProduct }) => {
       quantity,
     };
 
-    onAddProduct(newProduct, clearInputs);
+    addProduct(newProduct, productDispatch, clearInputs);
   };
 
   return (
@@ -41,7 +44,6 @@ const AddForm = ({ onAddProduct }) => {
       </p>
       <h3>Add Product</h3>
 
-      
       <form>
         <ProductInput
           title="Product Name"
