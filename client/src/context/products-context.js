@@ -20,6 +20,12 @@ export const ProductsReducer = (state, action) => {
       const deletedProductId = action.payload;
       return state.filter((product) => product.id !== deletedProductId);
     }
+    case 'PRODUCT_ADDED_TO_CART': {
+      const addedProduct = action.payload;
+      return state.map((product) =>
+        product.id === addedProduct.id ? addedProduct : product
+      );
+    }
     default: {
       return state;
     }

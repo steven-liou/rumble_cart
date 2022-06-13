@@ -43,6 +43,14 @@ const checkoutCart = async () => {
   await axios.post('/api/checkout');
 };
 
+const addProductToCart = async (productId) => {
+  const { data } = await axios.post('/api/add-to-cart', { productId });
+  let { product, item } = data;
+  product = productWithId(product);
+  item = productWithId(item);
+  return [product, item];
+};
+
 const apiClient = {
   fetchProducts,
   addProduct,
@@ -50,6 +58,7 @@ const apiClient = {
   deleteProduct,
   fetchCart,
   checkoutCart,
+  addProductToCart,
 };
 
 export default apiClient;

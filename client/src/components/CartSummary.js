@@ -42,7 +42,10 @@ const EmptyCartSummary = () => {
 };
 
 const SummaryTable = ({ cartItems }) => {
-  const total = cartItems.reduce((sum, item) => sum + item.price, 0);
+  const total = cartItems.reduce(
+    (sum, item) => sum + item.price * item.quantity,
+    0
+  );
   return (
     <table className="cart-items">
       <thead>

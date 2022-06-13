@@ -1,9 +1,11 @@
 import EditForm from './EditForm.js';
 import { ProductContext, deleteProduct } from '../context/products-context.js';
 import { useContext } from 'react';
+import { addProductToCart, CartContext } from '../context/cart-context.js';
 
-const Product = ({ product, onAddToCart }) => {
+const Product = ({ product }) => {
   const { dispatch: dispatchProduct } = useContext(ProductContext);
+  const { dispatch: dispatchCart } = useContext(CartContext);
   const handleOnDeleteProduct = (e) => {
     e.preventDefault();
     if (window.confirm(`Are you sure you want to delete ${product.title} ?`)) {
@@ -13,7 +15,7 @@ const Product = ({ product, onAddToCart }) => {
 
   const handleAddToCart = (e) => {
     e.preventDefault();
-    onAddToCart(product.id);
+    addProductToCart(product.id, dispatchProduct, dispatchCart);
   };
   return (
     <div className="product">

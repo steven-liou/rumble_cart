@@ -1,7 +1,6 @@
 import { useContext, useState } from 'react';
 import ProductInput from './ProductInput';
-import { addProduct } from '../context/products-context';
-import { ProductContext } from '../context/products-context';
+import { addProduct, ProductContext } from '../context/products-context';
 
 const AddForm = () => {
   const [addFormVisible, setAddFormVisible] = useState(false);

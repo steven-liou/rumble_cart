@@ -9,6 +9,19 @@ const cartReducer = (state, action) => {
       return action.payload;
     case 'CHECKOUT':
       return [];
+    case 'PRODUCT_ADDED_TO_CART':
+      const addedItem = action.payload;
+      const cartItems = state;
+      const exists = cartItems.find((item) => item.id === addedItem.id);
+
+      if (!exists) {
+        return cartItems.concat(addedItem);
+      } else {
+        return cartItems.map((item) =>
+          item.id === addedItem.id ? addedItem : item
+        );
+      }
+
     default:
       return state;
   }
@@ -22,6 +35,17 @@ export const fetchCart = async (dispatch) => {
 export const checkoutCart = async (dispatch) => {
   await apiClient.checkoutCart();
   dispatch({ type: 'CHECKOUT' });
+};
+
+export const addProductToCart = async (
+  productId,
+  dispatchProduct,
+  dispatchCart
+) => {
+  const [product, item] = await apiClient.addProductToCart(productId);
+  const message = 'PRODUCT_ADDED_TO_CART';
+  dispatchCart({ type: message, payload: item });
+  dispatchProduct({ type: message, payload: product });
 };
 
 export const CartProvider = ({ children }) => {
